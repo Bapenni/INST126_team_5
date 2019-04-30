@@ -8,12 +8,19 @@ url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=e9926d9cabaa85d
 
 request = requests.get(url)
 
+request_string = str(requests.get(url))
+
+# Converts the request value into a base 3 digit error code for error handling
+error = int(request_string[-5:-2])
+# print(error)
+if error == 404:
+    print("You didn't enter a valid city name!")
+    quit()
+
 data = request.json()
 
 print(request)
-
-print(data)
-
+# print(data)
 print(url)
 
 print('*~*~*~*~*~*~*~*')
