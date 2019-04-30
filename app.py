@@ -29,17 +29,23 @@ longitude = data['coord']['lon']
 
 
 def wind_direction_convert(degree):
-    """Takes in the variable wind_dir and converts the numeric value to its corresponding cardinal direction IN PROGRESS"""
-    if degree >= 340.001 or degree <= 20:
+    """Takes in the variable wind_dir and converts the numeric value to its corresponding cardinal direction"""
+    if degree >= 337.501 or degree <= 22.5:
         wind_direction = 'North'
-    elif degree >= 20.001 and degree <= 40:
-        wind_direction = 'North/Northeast'
-    elif degree >= 40.001 and degree <= 60:
+    elif degree >= 22.501 and degree <= 65.5:
         wind_direction = 'Northeast'
-    elif degree >= 60.001 and degree <= 80:
-        wind_direction = 'East/Northeast'
+    elif degree >= 65.501 and degree <= 112.5:
+        wind_direction = 'East'
+    elif degree >= 112.501 and degree <= 157.5:
+        wind_direction = 'Southeast'
+    elif degree >= 157.501 and degree <= 202.5:
+        wind_direction = 'South'
+    elif degree >= 202.501 and degree <= 247.5:
+        wind_direction = 'Southwest'
+    elif degree >= 247.501 and degree <= 292.5:
+        wind_direction = 'West'
     else:
-        wind_direction = 'North/Northwest'
+        wind_direction = 'Northwest'
     return wind_direction
 
 
