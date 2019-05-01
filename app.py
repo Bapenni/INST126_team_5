@@ -35,7 +35,7 @@ latitude = data['coord']['lat']
 longitude = data['coord']['lon']
 
 
-def wind_direction_convert(degree):
+def wind_direction_convert(wind_dir):
     """Takes in the variable wind_dir and converts the numeric value to its corresponding cardinal direction"""
     if degree >= 337.501 or degree <= 22.5:
         wind_direction = 'North'
