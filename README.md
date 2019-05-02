@@ -13,4 +13,4 @@ https://github.com/erikflowers/weather-icons <br>
 https://gist.github.com/tbranyen/62d974681dea8ee0caa1 <br>
 
 
-Get GUI to work then we can wrap up! - Ayesha <br> 
+Wrap up! - Ayesha <br> 
