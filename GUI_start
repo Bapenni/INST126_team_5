@@ -1,19 +1,82 @@
+import requests
 import tkinter as tk
 
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
-        self.pack()
-        self.create_widgets()
-    def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Find out what the weather is today\n(click me)"
-        self.hi_there["command"] = self.weather
-        self.hi_there.pack(side="top")
+HEIGHT=500
+WIDTH=600 
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=self.master.destroy)
-        self.quit.pack(side="bottom")
-    def weather(self):
-        print("Enter a valid city")
+def get_weather(city):
+    key='a4aa5e3d83ffefaba8c00284de6ef7c3'
+    url= 'https://api.openweathermap.org/data/2.5/weather'
+    params = {'APPID': key, 'q': city, 'units': 'imperial'}
+    response = requests.get(url, params=params)
+    data = response.json()
+    label['text'] = response_format(weather)
+    
+    
+    
+def response_format(weather):
+    try:
+        name=weather['name']
+        discription= weather['weather'][0]['description']
+        temperature=weather['main']['temp']
+        wind_speed = data['wind']['speed']
+        wind_dir = data['wind']['deg']
+        humidity = data['main']['humidity']
+        hightemp = int(data['main']['temp_max'])
+        lowtemp = int(data['main']['temp_min'])
+        latitude = data['coord']['lat']
+        longitude = data['coord']['lon']
+        final_str= final_str = 'City: %s \nConditions: %s \nTemperature (°F): %s' % (name, descripton, temperature, wind_speed, wind_dir, humidity, latitude, longitude, hightemp, lowtemp)
+    except:
+        final_str = 'There was a problem retrieving that information'
+    return final_str
+    
+    
+    
+def wind_direction_convert(degree):
+    """Takes in the variable wind_dir and converts the numeric value to its corresponding cardinal direction"""
+    if degree >= 337.501 or degree <= 22.5:
+        wind_direction = 'North'
+    elif degree >= 22.501 and degree <= 65.5:
+        wind_direction = 'Northeast'
+    elif degree >= 65.501 and degree <= 112.5:
+        wind_direction = 'East'
+    elif degree >= 112.501 and degree <= 157.5:
+        wind_direction = 'Southeast'
+    elif degree >= 157.501 and degree <= 202.5:
+        wind_direction = 'South'
+    elif degree >= 202.501 and degree <= 247.5:
+        wind_direction = 'Southwest'
+    elif degree >= 247.501 and degree <= 292.5:
+        wind_direction = 'West'
+    else:
+        wind_direction = 'Northwest'
+    return wind_direction
+
+
+
+root = tk.Tk()
+
+canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
+canvas.pack()
+
+background_image = tk.PhotoImage(file='landscape.png')
+background_label = tk.Label(root, image=background_image)
+background_label.place(relwidth=1, relheight=1)
+
+frame = tk.Frame(root, bg='#80c1ff', bd=5)
+frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.1, anchor='n')
+
+entry = tk.Entry(frame, font=40)
+entry.place(relwidth=0.65, relheight=1)
+
+button = tk.Button(frame, text="Get Weather", font=40, command=lambda: get_weather(entry.get()))
+button.place(relx=0.7, relheight=1, relwidth=0.3)
+
+lower_frame = tk.Frame(root, bg='#80c1ff', bd=10)
+lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.6, anchor='n')
+
+label = tk.Label(lower_frame)
+label.place(relwidth=1, relheight=1)
+
+root.mainloop()
