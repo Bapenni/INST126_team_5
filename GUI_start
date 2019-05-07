@@ -1,3 +1,4 @@
+#import the requests library and tkinter library 
 import requests
 import tkinter as tk
 
@@ -5,6 +6,7 @@ import tkinter as tk
 HEIGHT=500
 WIDTH=600 
 
+#create a function of get_weather which stores the API data, sets parameter and responses
 def get_weather(city):
     """Stores api authentication data to pass into the api to make requests"""
     key='a4aa5e3d83ffefaba8c00284de6ef7c3'
@@ -73,29 +75,29 @@ def wind_direction_convert(degree):
     return wind_direction
 
 
-
+#oper window for GUI 
 root = tk.Tk()
-root.title("Gui Weather App!")
-canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
-canvas.pack()
+root.title("Gui Weather App!") #create title for window 
+canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH) #create height and width of window 
+canvas.pack() #call canvas 
 
-background_image = tk.PhotoImage(file='landscape.png')
-background_label = tk.Label(root, image=background_image)
-background_label.place(relwidth=1, relheight=1)
+background_image = tk.PhotoImage(file='landscape.png') #set the background image 
+background_label = tk.Label(root, image=background_image) #label the background image 
+background_label.place(relwidth=1, relheight=1) #place the background image where you want to 
 
-frame = tk.Frame(root, bg='#80c1ff', bd=5)
+frame = tk.Frame(root, bg='#80c1ff', bd=5) #set frame for text 
 frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.1, anchor='n')
 
-entry = tk.Entry(frame, font=40)
+entry = tk.Entry(frame, font=40) #set location and font for entry 
 entry.place(relwidth=0.65, relheight=1)
 
-button = tk.Button(frame, text="Get Weather", font=40, command=lambda: get_weather(entry.get()))
-button.place(relx=0.7, relheight=1, relwidth=0.3)
+button = tk.Button(frame, text="Get Weather", font=40, command=lambda: get_weather(entry.get())) #create a button and set font 
+button.place(relx=0.7, relheight=1, relwidth=0.3) #placement of button 
 
-lower_frame = tk.Frame(root, bg='#80c1ff', bd=10)
-lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.6, anchor='n')
+lower_frame = tk.Frame(root, bg='#80c1ff', bd=10) #creating another frame within the bigger one 
+lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.6, anchor='n') #location of frame 
 
-label = tk.Label(lower_frame)
-label.place(relwidth=1, relheight=1)
+label = tk.Label(lower_frame) #creating a label 
+label.place(relwidth=1, relheight=1) #placing the label on screen 
 
-root.mainloop()
+root.mainloop() #closing window of GUI 
