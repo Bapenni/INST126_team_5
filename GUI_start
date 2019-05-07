@@ -1,6 +1,7 @@
 import requests
 import tkinter as tk
 
+# defines the width and height of the GUI window
 HEIGHT=500
 WIDTH=600 
 
