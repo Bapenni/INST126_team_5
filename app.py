@@ -33,7 +33,8 @@ high = int(data['main']['temp_max'])
 low = int(data['main']['temp_min'])
 latitude = data['coord']['lat']
 longitude = data['coord']['lon']
-
+weather_icon = data['weather'][0]['icon']
+weather_icon_url = 'http://openweathermap.org/img/w/{}.png'.format(weather_icon)
 
 def wind_direction_convert(wind_dir):
     """Takes in the variable wind_dir and converts the numeric value to its corresponding cardinal direction"""
