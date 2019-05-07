@@ -44,9 +44,8 @@ Humidity: {}%
 Local Coordinates: ({:.2f}, {:.2f})
 High Temperature: {}°F
 Low Temperature: {}°F
-Conditions: {}
-# INPUT WEATHER ICON HERE OR INLINE WITH LINE 48
-""".format(name, description, temperature, wind_speed, wind_dir, humidity, latitude, longitude, hightemp, lowtemp, weather_description)
+# INPUT WEATHER ICON HERE OR INLINE WITH LINE 39
+""".format(name, description, temperature, wind_speed, wind_dir, humidity, latitude, longitude, hightemp, lowtemp)
     except:
        final_str = 'There was a problem retrieving that information'
     return final_str
