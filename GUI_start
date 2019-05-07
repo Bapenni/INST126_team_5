@@ -5,6 +5,7 @@ HEIGHT=500
 WIDTH=600 
 
 def get_weather(city):
+    """Stores api authentication data to pass into the api to make requests"""
     key='a4aa5e3d83ffefaba8c00284de6ef7c3'
     url= 'https://api.openweathermap.org/data/2.5/weather'
     params = {'APPID': key, 'q': city, 'units': 'imperial'}
@@ -15,6 +16,7 @@ def get_weather(city):
     
     
 def response_format(weather):
+    """Stores relevant weather data into variables and then returns them in an easy to read manner"""
     try:
         name = weather['name']
         description = weather['weather'][0]['description']
