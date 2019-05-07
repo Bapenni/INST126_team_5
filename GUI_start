@@ -30,6 +30,11 @@ def response_format(weather):
         lowtemp = int(weather['main']['temp_min'])
         latitude = weather['coord']['lat']
         longitude = weather['coord']['lon']
+        weather_description = data['weather'][0]['main']
+        weather_icon = data['weather'][0]['icon']
+        # weather_icon_url concatonates the weather_icon variable into the OpenWeather API link in order to retrieve the right weather icon
+        # to be used in the final weather report
+        weather_icon_url = 'http://openweathermap.org/img/w/{}.png'.format(weather_icon)
         final_str = """
 City: {}
 Conditions: {}
@@ -40,7 +45,9 @@ Humidity: {}%
 Local Coordinates: ({:.2f}, {:.2f})
 High Temperature: {}°F
 Low Temperature: {}°F
-""".format(name, description, temperature, wind_speed, wind_dir, humidity, latitude, longitude, hightemp, lowtemp)
+Conditions: {}
+# INPUT WEATHER ICON HERE OR INLINE WITH LINE 48
+""".format(name, description, temperature, wind_speed, wind_dir, humidity, latitude, longitude, hightemp, lowtemp, weather_description)
     except:
        final_str = 'There was a problem retrieving that information'
     return final_str
