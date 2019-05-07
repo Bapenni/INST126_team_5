@@ -33,7 +33,7 @@ def response_format(weather):
         weather_description = data['weather'][0]['main']
         weather_icon = data['weather'][0]['icon']
         # weather_icon_url concatonates the weather_icon variable into the OpenWeather API link in order to retrieve the right weather icon
-        # to be used in the final weather report
+        # to be used in the final weather report (from https://openweathermap.org/weather-conditions)
         weather_icon_url = 'http://openweathermap.org/img/w/{}.png'.format(weather_icon)
         final_str = """
 City: {}
