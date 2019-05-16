@@ -1,14 +1,10 @@
-#import the requests library and tkinter library 
 import requests
 import tkinter as tk
 
-# defines the width and height of the GUI window
 HEIGHT=500
 WIDTH=600 
 
-#create a function of get_weather which stores the API data, sets parameter and responses
 def get_weather(city):
-    """Stores api authentication data to pass into the api to make requests"""
     key='a4aa5e3d83ffefaba8c00284de6ef7c3'
     url= 'https://api.openweathermap.org/data/2.5/weather'
     params = {'APPID': key, 'q': city, 'units': 'imperial'}
@@ -19,7 +15,6 @@ def get_weather(city):
     
     
 def response_format(weather):
-    """Stores relevant weather data into variables and then returns them in an easy to read manner"""
     try:
         name = weather['name']
         description = weather['weather'][0]['description']
@@ -32,10 +27,6 @@ def response_format(weather):
         lowtemp = int(weather['main']['temp_min'])
         latitude = weather['coord']['lat']
         longitude = weather['coord']['lon']
-        icon = weather['weather'][0]['icon']
-        # weather_icon_url concatonates the weather_icon variable into the OpenWeather API link in order to retrieve the right weather icon
-        # to be used in the final weather report (from https://openweathermap.org/weather-conditions)
-        weather_icon_url = 'http://openweathermap.org/img/w/{}.png'.format(icon)
         final_str = """
 City: {}
 Conditions: {}
@@ -46,7 +37,6 @@ Humidity: {}%
 Local Coordinates: ({:.2f}, {:.2f})
 High Temperature: {}°F
 Low Temperature: {}°F
-# INPUT WEATHER ICON HERE OR INLINE WITH LINE 39
 """.format(name, description, temperature, wind_speed, wind_dir, humidity, latitude, longitude, hightemp, lowtemp)
     except:
        final_str = 'There was a problem retrieving that information'
@@ -75,29 +65,29 @@ def wind_direction_convert(degree):
     return wind_direction
 
 
-#oper window for GUI 
+
 root = tk.Tk()
-root.title("Gui Weather App!") #create title for window 
-canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH) #create height and width of window 
-canvas.pack() #call canvas 
+root.title("Gui Weather App!")
+canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
+canvas.pack()
 
-background_image = tk.PhotoImage(file='landscape.png') #set the background image 
-background_label = tk.Label(root, image=background_image) #label the background image 
-background_label.place(relwidth=1, relheight=1) #place the background image where you want to 
+background_image = tk.PhotoImage(file='clouds.png')
+background_label = tk.Label(root, image=background_image)
+background_label.place(relwidth=1, relheight=1)
 
-frame = tk.Frame(root, bg='#80c1ff', bd=5) #set frame for text 
+frame = tk.Frame(root, bg='#80c1ff', bd=5)
 frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.1, anchor='n')
 
-entry = tk.Entry(frame, font=40) #set location and font for entry 
+entry = tk.Entry(frame, font=40)
 entry.place(relwidth=0.65, relheight=1)
 
-button = tk.Button(frame, text="Get Weather", font=40, command=lambda: get_weather(entry.get())) #create a button and set font 
-button.place(relx=0.7, relheight=1, relwidth=0.3) #placement of button 
+button = tk.Button(frame, text="Get Weather", font=40, command=lambda: get_weather(entry.get()))
+button.place(relx=0.7, relheight=1, relwidth=0.3)
 
-lower_frame = tk.Frame(root, bg='#80c1ff', bd=10) #creating another frame within the bigger one 
-lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.6, anchor='n') #location of frame 
+lower_frame = tk.Frame(root, bg='#80c1ff', bd=10)
+lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.6, anchor='n')
 
-label = tk.Label(lower_frame) #creating a label 
-label.place(relwidth=1, relheight=1) #placing the label on screen 
+label = tk.Label(lower_frame)
+label.place(relwidth=1, relheight=1)
 
-root.mainloop() #closing window of GUI 
+root.mainloop()
